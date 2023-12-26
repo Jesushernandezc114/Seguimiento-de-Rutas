@@ -44,6 +44,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private FusedLocationProviderClient fusedLocationClient;
     private Location lastKnownLocation;
     private LocationCallback locationCallback;
+    private static final int REQUEST_LOCATION_PERMISSION = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +55,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         puntosDeRuta = new ArrayList<>();
 
         // Inicializar el mapa
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        if (mapFragment != null) {
-            mapFragment.getMapAsync(this);
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // Si los permisos no están otorgados, solicitarlos al usuario
+            ActivityCompat.requestPermissions(this,
+                    new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION},
+                    REQUEST_LOCATION_PERMISSION);
+        } else {
+            // Si los permisos están otorgados, proceder con la lógica relacionada con la ubicación
+            iniciarMapa();
         }
 
         // Inicializar el estado de la ruta
@@ -109,6 +116,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         puntosDeRuta.clear();
         googleMap.clear(); // Limpiar los marcadores existentes en el mapa
 
+
         // Obtener la ubicación actual al inicio de la ruta
         obtenerUbicacionActual();
 
@@ -118,6 +126,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         // Guardar la ubicación inicial
         ubicacionInicial = new UbicacionPunto(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
     }
+
 
     private void pausarRuta() {
         // Lógica para pausar la grabación de la ruta
@@ -251,5 +260,28 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
 
         builder.show();
+
     }
-}
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_LOCATION_PERMISSION) {
+            // Verificar si el usuario otorgó los permisos
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Los permisos fueron otorgados, proceder con la lógica relacionada con la ubicación
+                iniciarMapa();
+            } else {
+                // Los permisos fueron denegados, puedes mostrar un mensaje al usuario o realizar alguna acción
+                Toast.makeText(this, "Los permisos de ubicación son necesarios para esta aplicación.", Toast.LENGTH_SHORT).show();
+                // Puedes cerrar la actividad si no es posible continuar sin permisos
+                finish();
+            }
+        }
+    }
+        private void iniciarMapa () {
+            // Inicializar el mapa
+            SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+            if (mapFragment != null) {
+                mapFragment.getMapAsync(this);
+            }
+        }
+    }
