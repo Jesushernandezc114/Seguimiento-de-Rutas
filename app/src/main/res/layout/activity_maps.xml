@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MapsActivity">
+
+  <!-- Mapa -->
+  <fragment
+      android:id="@+id/map"
+      android:name="com.google.android.gms.maps.SupportMapFragment"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_above="@+id/bottomLayout" />
+
+  <!-- Botones de control de ruta en dos columnas -->
+  <LinearLayout
+      android:id="@+id/bottomLayout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_alignParentBottom="true"
+      android:background="@drawable/borde"
+      android:gravity="center_horizontal"
+      android:orientation="vertical"
+      android:padding="16dp">
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnCount="2"
+        android:rowCount="2"
+        tools:ignore="UselessParent">
+
+      <Button
+          android:id="@+id/btnIniciarRuta"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_columnWeight="1"
+          android:text="Iniciar Ruta" />
+
+      <Button
+          android:id="@+id/btnPausarRuta"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_columnWeight="1"
+          android:text="Pausar Ruta" />
+
+      <Button
+          android:id="@+id/btnReanudarRuta"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_columnWeight="1"
+          android:text="Reanudar Ruta" />
+
+      <Button
+          android:id="@+id/btnTerminarRuta"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_columnWeight="1"
+          android:text="Terminar Ruta" />
+
+    </GridLayout>
+  </LinearLayout>
+
+</RelativeLayout>

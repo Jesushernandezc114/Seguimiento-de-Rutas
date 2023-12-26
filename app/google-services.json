@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "950328066686",
+    "firebase_url": "https://seguimiento-de-rutas-87435-default-rtdb.firebaseio.com",
+    "project_id": "seguimiento-de-rutas-87435",
+    "storage_bucket": "seguimiento-de-rutas-87435.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:950328066686:android:2cf427b959749dc3a64e2f",
+        "android_client_info": {
+          "package_name": "com.example.seguimientoderutas"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6WWvqtFI8v0BSimuyg_fGHbqgXJv0nmE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

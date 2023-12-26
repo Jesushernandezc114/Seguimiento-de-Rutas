@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Seguimiento de Rutas</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">
+        AIzaSyDIDaMCXdjPfnsIcpbaAS2FLPYR2aqsEQM
+    </string>
+</resources>
